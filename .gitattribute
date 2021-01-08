@@ -1,8 +1,3 @@
-# Auto detect text files and perform LF normalization
-# https://www.davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
-*    text=auto
-
-*.cs text diff=csharp
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
@@ -31,7 +26,7 @@
 *.wixproj    text eol=crlf
 *.modelproj  text eol=crlf
 *.sqlproj    text eol=crlf
-*.wmaproj    text eol=crlf
+*.wwaproj    text eol=crlf
 
 *.xproj      text eol=crlf
 *.props      text eol=crlf
