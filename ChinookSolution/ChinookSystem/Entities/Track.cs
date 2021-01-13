@@ -48,5 +48,7 @@ namespace ChinookSystem.Entities
         [RegularExpression(@"^\d+\.\d{10,2}$")]
         [Range(0, 99999999.99)]
         public decimal UnitPrice { get; set; }
+
+        public virtual ICollection<Track> Tracks { get; set; }
     }
 }
