@@ -44,5 +44,8 @@ namespace ChinookSystem.Entities
         // NAVIGATIONAL PROPERTIES are not real data, so needs the keyword VIRTUAL
         // direction is many to one (or child to parent)
         public virtual Artist Artist { get; set; }
+        
+        // one to many direction(parent to the child)
+        public virtual ICollection<Track> Tracks { get; set; }
     }
 }

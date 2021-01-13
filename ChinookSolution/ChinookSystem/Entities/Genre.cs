@@ -28,6 +28,9 @@ namespace ChinookSystem.Entities
                 _Name = string.IsNullOrEmpty(value) ? null : value;
             } 
         }
-        public virtual ICollection<Genre> Genres { get; set; }
+
+        // NAVIGATIONAL PROPERTIES are not real data, so needs the keyword VIRTUAL
+        // one to many direction(parent to the child)
+        public virtual ICollection<Track> Tracks { get; set; } // parent has the connection to the child
     }
 }

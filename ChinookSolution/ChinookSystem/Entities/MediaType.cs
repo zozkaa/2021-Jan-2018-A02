@@ -28,6 +28,8 @@ namespace ChinookSystem.Entities
             }
         }
 
-        public virtual ICollection<MediaType> MediaTypes { get; set; }
+        // NAVIGATIONAL PROPERTIES are not real data, so needs the keyword VIRTUAL
+        // one to many direction(parent to the child)
+        public virtual ICollection<Track> Tracks { get; set; } // parent has the connection to the child
     }
 }
