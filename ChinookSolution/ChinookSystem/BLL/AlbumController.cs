@@ -16,7 +16,7 @@ namespace ChinookSystem.BLL
     [DataObject]
     public class AlbumController //interface to the outside world
     {
-        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ArtistAlbums> Albums_GetArtistAlbums()
         {
             using (var context = new ChinookSystemContext())
