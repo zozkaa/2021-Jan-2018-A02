@@ -17,6 +17,7 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ErrorMessage.Text = "";
             if (!Page.IsPostBack)
             {
                 // First time 
@@ -41,6 +42,26 @@ namespace WebApp.SamplePages
 
             // prompt line
             ArtistList.Items.Insert(0, new ListItem("Select...", "0")); // a more complete and proper way of doing an insert
+        }
+
+        protected void SearchAlbums_Click(object sender, EventArgs e)
+        {
+            if (ArtistList.SelectedIndex == 0)
+            {
+                // index 0 is physically pointing to the promptline. This is why using selectedindex instead of selectedvalue
+                ErrorMessage.Text = "Select an artist for the search.";
+                ArtistAlbumList.DataSource = null;
+                ArtistAlbumList.DataBind();
+            }
+            else
+            {
+                // standard lookup and assignment
+                AlbumController sysmgr = new AlbumController();
+                List<ChinookSystem.ViewModels.ArtistAlbums> info = sysmgr.Albums_GetAlbumsForArtist(int.Parse(ArtistList.SelectedValue));
+
+                ArtistAlbumList.DataSource = info;
+                ArtistAlbumList.DataBind();
+            }
         }
     }
 }
