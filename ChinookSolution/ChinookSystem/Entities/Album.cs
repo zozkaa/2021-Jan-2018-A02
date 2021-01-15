@@ -35,7 +35,7 @@ namespace ChinookSystem.Entities
             }
             set
             {
-                ReleaseLabel = string.IsNullOrEmpty(value) ? null : value;
+                _ReleaseLabel = string.IsNullOrEmpty(value)? null : value;
             }
         } // this is a fully implemented property
 

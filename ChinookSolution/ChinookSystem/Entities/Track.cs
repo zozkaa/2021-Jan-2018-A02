@@ -13,8 +13,7 @@ namespace ChinookSystem.Entities
 {
     [Table("Tracks")]
     internal class Track
-    {
-        private string _Name;
+    {        
         private string _Composer;
 
         [Key]
