@@ -1,38 +1,25 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-#region Additional Namespace
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-#endregion
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
 
 namespace ChinookSystem.Entities
 {
-    [Table("Artists")]
-    // Can only be seen in the library class
-    internal class Artist
+    internal partial class Artist
     {
-        private string _Name;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Artist()
+        {
+            Albums = new HashSet<Album>();
+        }
 
-        
-        [Key] //primary key with identity specification = yes
         public int ArtistId { get; set; }
-        // annotations to do validations
-        [StringLength(120, ErrorMessage = "Artist name is limited to 120 characters.")]
-        public string Name {
-            get { 
-                return _Name; 
-            }
-            set {
-                _Name = string.IsNullOrEmpty(value) ? null : value;
-            }
-        } // this is a fully implemented property
 
-        // NAVIGATIONAL PROPERTY
-        // one to many (parent to child)
+        [StringLength(120)]
+        public string Name { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Album> Albums { get; set; }
     }
 }

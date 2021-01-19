@@ -1,51 +1,39 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-#region Additional Namespace
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-#endregion
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
 
 namespace ChinookSystem.Entities
 {
-    [Table("Albums")]
-    internal class Album
+    internal partial class Album
     {
         private string _ReleaseLabel;
-
-        [Key]
-        public int AlbumId { get; set; }
-        
-        [Required(ErrorMessage ="Album Title is required")]
-        [StringLength(160, ErrorMessage = "Album Title is limited to 160 characters.")]
-        public string Title { get; set; }
-                
-        public int ArtistId { get; set; }
-        public int ReleaseYear { get; set; }
-        
-        [StringLength(50, ErrorMessage = "Album release label is limited to 50 characters.")]
-        public string ReleaseLabel
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Album()
         {
-            get
-            {
-                return _ReleaseLabel;
-            }
-            set
-            {
-                _ReleaseLabel = string.IsNullOrEmpty(value)? null : value;
-            }
-        } // this is a fully implemented property
+            Tracks = new HashSet<Track>();
+        } // helps with online transaction processing
 
-        // [NotMapped] annotations are also allowed
-        
-        // NAVIGATIONAL PROPERTIES are not real data, so needs the keyword VIRTUAL
-        // direction is many to one (or child to parent)
+        public int AlbumId { get; set; }
+
+        [Required(ErrorMessage ="Album title is required.")]
+        [StringLength(160, MinimumLength =1, ErrorMessage ="Album title is limited to 160 characters.")]
+        public string Title { get; set; }
+
+        public int ArtistId { get; set; }
+
+        public int ReleaseYear { get; set; }
+
+        [StringLength(50, ErrorMessage = "Album release lable is limited to 50 characters.")]
+        public string ReleaseLabel {
+            get { return _ReleaseLabel; }
+            set { _ReleaseLabel = string.IsNullOrEmpty(value) ? null : value; } 
+        }
+
         public virtual Artist Artist { get; set; }
-        
-        // one to many direction(parent to the child)
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Track> Tracks { get; set; }
     }
 }
