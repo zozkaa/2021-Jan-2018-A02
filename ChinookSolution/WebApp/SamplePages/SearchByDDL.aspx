@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="Filter Search Demo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SearchByDDL.aspx.cs" Inherits="WebApp.SamplePages.SearchByDDL" %>
+
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Search Albums by Artist</h1>
 
@@ -12,13 +15,12 @@
     </div>
 
     <br /><br />
-
     <div class="row">
         <div class="offset-3">
-            <asp:Label ID="ErrorMessage" runat="server"></asp:Label>
+            <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
         </div>
     </div>
-
+    <br /><br />
     <div class="row">
         <div class="offset-3">
             <asp:GridView ID="ArtistAlbumList" runat="server" AutoGenerateColumns="False"
@@ -49,7 +51,7 @@
                 </EmptyDataTemplate>
             </asp:GridView>
             
-            <asp:ObjectDataSource ID="ArtistListODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Artist_DDLList" TypeName="ChinookSystem.BLL.ArtistController"></asp:ObjectDataSource>
+            <asp:ObjectDataSource ID="ArtistListODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Artist_DDLList" OnSelected="SelectCheckForException" TypeName="ChinookSystem.BLL.ArtistController"></asp:ObjectDataSource>
         </div>
     </div>
 

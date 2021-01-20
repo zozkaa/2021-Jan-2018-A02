@@ -17,13 +17,19 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ErrorMessage.Text = "";
+            //Message.Text = "";
             if (!Page.IsPostBack)
             {
                 // First time 
                 LoadArtistList();
             }
         }
+        #region Error Handling ODS
+        protected void SelectCheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
+        #endregion
 
         protected void LoadArtistList()
         {
@@ -49,18 +55,48 @@ namespace WebApp.SamplePages
             if (ArtistList.SelectedIndex == 0)
             {
                 // index 0 is physically pointing to the promptline. This is why using selectedindex instead of selectedvalue
-                ErrorMessage.Text = "Select an artist for the search.";
+                // using MessageUserControl for your own message
+                //MessageUserControl.ShowInfo("Select an artist for the search.");
+                MessageUserControl.ShowInfo("Search concern", "Select an artist for the search.");
                 ArtistAlbumList.DataSource = null;
                 ArtistAlbumList.DataBind();
             }
             else
             {
-                // standard lookup and assignment
-                AlbumController sysmgr = new AlbumController();
-                List<ChinookSystem.ViewModels.ArtistAlbums> info = sysmgr.Albums_GetAlbumsForArtist(int.Parse(ArtistList.SelectedValue));
 
-                ArtistAlbumList.DataSource = info;
-                ArtistAlbumList.DataBind();
+                /*  user friendly error handling
+                 * normally when you leave the web page to your class library, you will want to have error handling
+                    (aka try/catch) 
+                 
+                    use MessageUserControl to handle errors
+                    !!!!!    MessageUserControl has try/catch embedded inside it's logic      !!!!!
+                    Syntax
+                    
+                MessageUserControl.TryRun(() = > {
+                
+                    AlbumController sysmgr = new AlbumController();
+                    List<ChinookSystem.ViewModels.ArtistAlbums> info = sysmgr.Albums_GetAlbumsForArtist(int.Parse(ArtistList.SelectedValue));
+
+                    ArtistAlbumList.DataSource = info;
+                    ArtistAlbumList.DataBind();
+                }, "Success Message Title", "Your success message goes here");
+                 
+                SUCCESS message goes AFTER the coding block
+
+
+                or MessageUserControl.ShowInfo("Show Concern", "Message here")
+                 */
+                // standard lookup and assignment
+
+                MessageUserControl.TryRun(() =>
+                {
+                    AlbumController sysmgr = new AlbumController();
+                    List<ChinookSystem.ViewModels.ArtistAlbums> info = sysmgr.Albums_GetAlbumsForArtist(int.Parse(ArtistList.SelectedValue));
+
+                    ArtistAlbumList.DataSource = info;
+                    ArtistAlbumList.DataBind();
+                }, "Success Message Title", "Your success message goes here");
+
             }
         }
     }
