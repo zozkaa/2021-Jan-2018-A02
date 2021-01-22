@@ -70,6 +70,7 @@ namespace ChinookSystem.BLL
         }
 
         // query to look up an Album record by pkey
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public AlbumItem Albums_FindById(int albumid)
         {
             /*  (...).FirstOrDefault will return either 
