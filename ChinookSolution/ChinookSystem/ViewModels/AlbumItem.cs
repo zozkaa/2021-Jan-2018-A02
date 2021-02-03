@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ChinookSystem.ViewModels
 {
-     public class AlbumItem
-    {        
+    public class AlbumItem
+    {
         public int AlbumId { get; set; }
 
         public string Title { get; set; }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-#region Additional Namespaces
+#region Additional Namespace
 using ChinookSystem.Entities;
 #endregion
 
@@ -25,7 +25,7 @@ namespace ChinookSystem.DAL
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<MediaType> MediaTypes { get; set; }
         public virtual DbSet<Playlist> Playlists { get; set; }
-        public virtual DbSet<PlaylistTrack> PlaylistTracks { get; set; }        
+        public virtual DbSet<PlaylistTrack> PlaylistTracks { get; set; }
         public virtual DbSet<Track> Tracks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

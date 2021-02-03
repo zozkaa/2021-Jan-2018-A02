@@ -1,59 +1,73 @@
-﻿<%@ Page Title="Filter Search Demo" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SearchByDDL.aspx.cs" Inherits="WebApp.SamplePages.SearchByDDL" %>
+﻿<%@ Page Title="Filter Search Demo" Language="C#" MasterPageFile="~/Site.Master" 
+    AutoEventWireup="true" CodeBehind="SearchByDDL.aspx.cs" 
+    Inherits="WebApp.SamplePages.SearchByDDL" %>
 
-<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" 
+    TagName="MessageUserControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Search Albums by Artist</h1>
-
-    <%-- Search Area --%>
+    <h1> Search Albums by Artist</h1>
     <div class="row">
         <div class="offset-3">
-            <asp:Label ID="Label1" runat="server" Text="Select an artist"></asp:Label> &nbsp;&nbsp;
-            <asp:DropDownList ID="ArtistList" runat="server"></asp:DropDownList> &nbsp;&nbsp;
-            <asp:LinkButton ID="SearchAlbums" runat="server" OnClick="SearchAlbums_Click"><i class="fa fa-search"></i> &nbsp; Search</asp:LinkButton>
+            <asp:Label ID="Label1" runat="server" 
+                Text="Select an artist"></asp:Label>&nbsp;&nbsp;
+            <asp:DropDownList ID="ArtistList" runat="server">
+
+            </asp:DropDownList>&nbsp;&nbsp;
+            <asp:LinkButton ID="SearchAlbums" runat="server" OnClick="SearchAlbums_Click">
+                <i class="fa fa-search"></i>Search</asp:LinkButton>
         </div>
     </div>
-
     <br /><br />
     <div class="row">
         <div class="offset-3">
             <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
-        </div>
+         </div>
     </div>
     <br /><br />
-    <div class="row">
+     <div class="row">
         <div class="offset-3">
-            <asp:GridView ID="ArtistAlbumList" runat="server" AutoGenerateColumns="False"
-                CssClass="table table-striped"
-                gridlines="Horizontal" BorderStyle="none">
+            <asp:GridView ID="ArtistAlbumList" runat="server" 
+                AutoGenerateColumns="False"
+                 CssClass="table table-striped"
+                 GridLines="Horizontal" BorderStyle="None">
+
                 <Columns>
                     <asp:TemplateField HeaderText="Album">
-                        <ItemStyle HorizontalAlign="Left"></ItemStyle>
-                            <ItemTemplate>
-                                <asp:Label ID="Label2" runat="server" Text='<%# Eval("Title") %>'></asp:Label>
-                            </ItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label2" runat="server" 
+                                Text='<%# Eval("Title") %>'></asp:Label>
+                        </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Released">
-                        <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                            <ItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("ReleaseYear") %>'></asp:Label>
-                            </ItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label3" runat="server" 
+                                Text='<%# Eval("ReleaseYear") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center">
+                        </ItemStyle>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Artist">
-                            <ItemTemplate>
-                                <asp:DropDownList ID="ArtistNameList" runat="server" DataSourceID="ArtistListODS" DataTextField="DisplayField" DataValueField="ValueField" selectedvalue='<%# Eval("ArtistId") %>' Width="400px">
-                                </asp:DropDownList>
-                            </ItemTemplate>
-                    </asp:TemplateField>                   
+                        <ItemTemplate>
+                            <asp:DropDownList ID="ArtistNameList" runat="server" 
+                                DataSourceID="ArtistNameListODS" 
+                                DataTextField="DisplayField" 
+                                DataValueField="ValueField" Width="250px"
+                                 selectedvalue='<%# Eval("ArtistId") %>'>
+                            </asp:DropDownList>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <EmptyDataTemplate>
-                    No albums for selected artist 
+                    No albums for selected artist
                 </EmptyDataTemplate>
             </asp:GridView>
-            
-            <asp:ObjectDataSource ID="ArtistListODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Artist_DDLList" OnSelected="SelectCheckForException" TypeName="ChinookSystem.BLL.ArtistController"></asp:ObjectDataSource>
-        </div>
+            <asp:ObjectDataSource ID="ArtistNameListODS" runat="server" 
+                OldValuesParameterFormatString="original_{0}" 
+                SelectMethod="Artists_DDLList" 
+                 OnSelected="SelectCheckForException"
+                TypeName="ChinookSystem.BLL.ArtistController">
+            </asp:ObjectDataSource>
+         </div>
     </div>
-
-
 </asp:Content>
