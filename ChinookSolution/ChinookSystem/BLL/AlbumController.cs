@@ -24,8 +24,6 @@ namespace ChinookSystem.BLL
         {
             using(var context = new ChinookSystemContext())
             {
-                //Linq to Entity
-
                 IEnumerable<ArtistAlbums> results = from x in context.Albums
                                                     select new ArtistAlbums
                                                     {
@@ -99,6 +97,11 @@ namespace ChinookSystem.BLL
         {
             using (var context = new ChinookSystemContext())
             {
+                //  Linq to Entity
+                //      In CPSC 1517 when entity were public, we could use the entityframeword method
+                //      the entityframeword method extention .Find(xxx)
+                //      to retreive the database record on the primary key
+                //      return context.Dbsetname.Find(xxx);
                 AlbumItem results = (from x in context.Albums
                                     where x.AlbumId == albumid
                                     select new AlbumItem

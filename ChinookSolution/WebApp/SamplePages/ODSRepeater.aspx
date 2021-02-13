@@ -16,6 +16,7 @@
                 DataSourceID="EmployeeCustomersODS"
                 ItemType="ChinookSystem.ViewModels.EmployeeCustomerList">
                 <HeaderTemplate>
+
                     <h3>Sales Support Employees</h3>
                 </HeaderTemplate>
                 <ItemTemplate>
@@ -31,7 +32,7 @@
                             Name: <%# Item.CustomerName %> &nbsp;&nbsp;
                             Phone: <%# Item.Phone %> &nbsp;&nbsp;
                             City: <%# Item.City %> &nbsp;&nbsp;
-                            State: <%# Item.State %> &nbsp;&nbsp;                            
+                            State: <%# Item.State == null ? "unknown" : Item.State%> &nbsp;&nbsp;      
                             <br />
                         </ItemTemplate>
                     </asp:Repeater>
