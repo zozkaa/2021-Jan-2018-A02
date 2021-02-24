@@ -121,6 +121,11 @@
                                         href="~/SamplePages/ODSRepeater.aspx"
                                         style="color:black" runat="server">
                                    Display with ODS Repeater</a>
+                                <a class="dropdown-item"
+                                        href="~/SamplePages/ManagePlaylist.aspx"
+                                        style="color:black" runat="server">
+                                   OLTP Manage Platlist</a>
+ 
                             </div>
                          </li>
                          <li class="nav-item">
